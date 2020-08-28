@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <p id="p">hello world</p>
+    <script>
+        $("#p").click(function(evt){
+            alert("hello")
+            $("#p").off("click")
+            fun()
+        })
+        function fun(){
+        $("#p").click(function(evt){
+            alert("hey")
+        })
+        }
+    </script>
+</body>
+</html>

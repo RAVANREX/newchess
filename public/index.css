@@ -1,0 +1,38 @@
+
+.box{
+    background-image: url("chess.svg");
+    background-repeat: no-repeat;
+    width:600px;
+    height: 600px;
+    display:grid;
+    grid-template-rows: repeat(8,75px);
+    grid-template-columns: repeat(8,75px);
+}
+.inside{
+    font-size:65px;
+    text-align:center;
+    font-family: a;
+
+    
+}
+.chessboard {
+    width: 650px;
+    height: 650px;
+    margin: auto;
+    border: 25px solid #333;}
+.connected, .ready{
+    font-weight:normal;
+
+}
+
+.connected span,
+    .ready span{
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        background:red;
+}
+
+span.green{
+    background:green;
+}
