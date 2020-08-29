@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.png" sizes="16x16" type="image/png"> 
-    <title>Document</title>
-    
-    <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -18,97 +13,19 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
-
-<link rel="stylesheet" href="index.css">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Parisienne&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    <link rel="icon" href="favicon.png" sizes="16x16" type="image/png"> 
+    <link rel="stylesheet" href="index.css">
 
 </head>
 <body>
-    <button id="singleplayerbutton">Single Player</button>
-    <button id="multiplayerbutton">Multi Player</button>
-    <section class="player p1">
-        player 1
-        <section class="connected">Connected <span></span></section>
-        <section class="ready">Ready <span></span></section>
-    </section>
-    <section class="player p2">
-        player 2
-        <section class="connected">Connected <span></span></section>
-        <section class="ready">Ready <span></span></section>
-    </section>
-    <p class="chessboard box" id="box"></p>    
-
-    <script>
-       board="";
-       brk =""; 
-       cvar="black";
-      for(let i=0;i<8;i++){
-        brk="";
-           for(let j=0;j<8;j++){
-               if(cvar=="white"){cvar="black"}
-               else {cvar="white"}
-
-          brk+="<div id="+i+j+"></div>"
-       }
-       board+=brk;
-       if(cvar=="white"){cvar="black"}
-       else {cvar="white"}
-    }
-    document.getElementById('box').innerHTML=board;
-    document.getElementById('00').innerHTML="<p class='inside' >&#9820</p>"
-    document.getElementById('01').innerHTML="<p class='inside' >&#9822</p>"
-    document.getElementById('02').innerHTML="<p class='inside' >&#9821</p>"
-    document.getElementById('03').innerHTML="<p class='inside' >&#9819</p>"
-    document.getElementById('04').innerHTML="<p class='inside' >&#9818</p>"
-    document.getElementById('05').innerHTML="<p class='inside' >&#9821</p>"
-    document.getElementById('06').innerHTML="<p class='inside' >&#9822</p>"
-    document.getElementById('07').innerHTML="<p class='inside' >&#9820</p>"
-    document.getElementById('10').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('11').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('12').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('13').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('14').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('15').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('16').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('17').innerHTML="<p class='inside' >&#9823</p>"
-    document.getElementById('60').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('61').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('62').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('63').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('64').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('65').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('66').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('67').innerHTML="<p class='inside' >&#9817</p>"
-    document.getElementById('70').innerHTML="<p class='inside' >&#9814</p>"
-    document.getElementById('71').innerHTML="<p class='inside' >&#9816</p>"
-    document.getElementById('72').innerHTML="<p class='inside' >&#9815</p>"
-    document.getElementById('73').innerHTML="<p class='inside' >&#9813</p>"
-    document.getElementById('74').innerHTML="<p class='inside' >&#9812</p>"
-    document.getElementById('75').innerHTML="<p class='inside' >&#9815</p>"
-    document.getElementById('76').innerHTML="<p class='inside' >&#9816</p>"
-    document.getElementById('77').innerHTML="<p class='inside' >&#9814</p>"
-   
-    for(let i=0;i<2;i++)
-    {
-        for(let j=0;j<8;j++)
-        {
-            document.getElementById(i.toString()+j.toString()).classList.add("black");
-        }
-    }
-    for(let i=6;i<=7;i++)
-    {
-        for(let j=0;j<8;j++)
-        {
-            document.getElementById(i.toString()+j.toString()).classList.add("white");
-        }
-    }
-</script>
-
-<audio id="myAudio">
-    <source src="chess.mp3" type="audio/mpeg">
-  </audio>
-  <script src="index.js"></script>
-<div id="info"></div>
+    <p>Welcome to SAYAN & SUMAN's chess</p>
+    <form action="singleplayer.html"><button class="btnc">Offline Multiplayer</button></form>
+    <br>
+    <form action="multiplayer.html"><button class="btnc">Online Multiplayer</button></form>
 </body>
-
 </html>

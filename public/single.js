@@ -3,134 +3,44 @@
     var currentID="",prevID="",q1="",q2="",q3="",q4="",q5="",q6="",q7="",q8="";
     var b1="",b2="",b3="",b4="";
     var c1="",c2="",c3="",c4="";
-
+    var num=1;
     var w=document.getElementById("74").innerHTML;
     var b=document.getElementById("04").innerHTML;
     var whiteKingPos="74",blackKingPos="04";
-    var functionSelecter=1;
     var flag="white";
     var i=11,j=0,k=1,l=8;
-    let gamemode = "null"
-    var playerNum = 0
-    let ready=false
-    let enemyready=false
-    let currentplayer="user"
-    var playingplayer=0
-    var socket=io();
-      
-
-
-
-
-
-
-    
-    //get your player number
-    socket.on('player-number',num =>{
-        console.log(`we habe git this number ${num}`)
-        playingplayer=num;
-       
-    if(num==-1)
-    document.getElementById("info").innerHTML="sorry this server is full"
-    else{
-    playerNum=parseInt(num)
-    if(playerNum==1){
-        currentplayer="enemy"
-        ////// suman edided to rotate board
-        $("#box").addClass("rotate");
-        $(".inside").addClass("rotate");
-        $("#left").addClass("rotate");
-        $("#right").addClass("rotate");
-
-    }
-    console.log(playerNum)
-    }
-}) 
-
-
-
-//another player has connected or disconnected
-socket.on('player-connection', num=>{
-    console.log(`player number ${num} has connected or disconnected `)
-    playerconnectedordisconnected(num)
-   })
-
-///ready bitton click
-
-
-function playerconnectedordisconnected(num){
-      let player=`.p${parseInt(num)+1}`
-      document.querySelector(`${player} .connected span`).classList.toggle('green')
-       if(parseInt(num)==playerNum){
-       document.querySelector(player).style.fontWeight='bold'
-       }
-   }
-
-   
-   
-   socket.on('player-number',num=>{
-       console.log(num+" vitore")
-   
-
-    $("div").click(function(e){
-        e.preventDefault()
-        console.log(this.id)
-        if(num==0 && flag=="white"){
-        startchess(this.id)
-        }
-        if(num==1 && flag=="black"){
-            startchess(this.id) 
+    $("div").click(function(evt){
+        console.log(flag)
+        console.log(w)
+        
+        currentID=this.id;
+        
+         if(num==1){
+            if(flag=="white" && $("#"+currentID).attr("class")=="white")
+            num=fun1();
+            else if(flag=="black" && $("#"+currentID).attr("class")=="black")
+            num=fun1();
+        }else if(num==0){
+            if(flag=="black")
+            num=bpawn();
+        }else if(num==2){
+            if(flag=="white")
+            num=wpawn();
+        }else if(num==3){
+            num=boat();
+        }else if(num==4){
+            num=bishop();
+        }else if(num==5){
+            num=queen();
+        }else if(num==6){
+            num=knight();
+        }else if(num==7){
+            num=king();
         }
     })
 
 
-
-})
-
-    
-        socket.on('reciv', send=>{
-            console.log(`this data is recived from client ${send}`)
-            startchess(send[1])
-            startchess(send[0])
-            })
-    
-    
-    function startchess(currentID){
-        console.log(`this in your current id your arae palyer ${playingplayer}`)
-        console.log(`////// currentid holo ${currentID}`)
-        console.log(`previd holo ${prevID}\\\\\\\\`)
-        
-    
-  
-
-         if(functionSelecter==1){
-            if(flag=="white" && $("#"+currentID).attr("class")=="white")
-            functionSelecter=fun1(currentID);
-            else if(flag=="black" && $("#"+currentID).attr("class")=="black")
-            functionSelecter=fun1(currentID);
-        }else if(functionSelecter==0){
-            if(flag=="black")
-            functionSelecter=bpawn(currentID);
-        }else if(functionSelecter==2){
-            if(flag=="white")
-            functionSelecter=wpawn(currentID);
-        }else if(functionSelecter==3){
-            functionSelecter=boat(currentID);
-        }else if(functionSelecter==4){
-            functionSelecter=bishop(currentID);
-        }else if(functionSelecter==5){
-            functionSelecter=queen(currentID);
-        }else if(functionSelecter==6){
-            functionSelecter=knight(currentID);
-        }else if(functionSelecter==7){
-            functionSelecter=king(currentID);
-        }
-
-    
-///////////
-    }
-
-    function fun1(currentID){
+    function fun1(){
         /// black pawn
         if(document.getElementById(currentID).innerText.charCodeAt(0)=="9823"){
         prevID=currentID;
@@ -763,7 +673,7 @@ function playerconnectedordisconnected(num){
 
     /// function for guties
 
-    function bpawn(currentID){
+    function bpawn(){
         var u=prevID.charAt(0);
         var s=prevID.charAt(1);
         removeGreen((parseInt(u)+1).toString(),s.toString());
@@ -813,7 +723,7 @@ function playerconnectedordisconnected(num){
     }
 
 
-    function wpawn(currentID){
+    function wpawn(){
         var u=prevID.charAt(0);
         var s=prevID.charAt(1);
         removeGreen((parseInt(u)-1).toString(),s.toString());
@@ -862,7 +772,7 @@ function playerconnectedordisconnected(num){
     }
 
 
-    function boat(currentID){
+    function boat(){
             var u=prevID.charAt(0);
             var s=prevID.charAt(1);
             while((parseInt(u)+1)<=parseInt(b1.charAt(0)))
@@ -904,7 +814,7 @@ function playerconnectedordisconnected(num){
 
 
 
-    function bishop(currentID){
+    function bishop(){
         var u=prevID.charAt(0);
         var s=prevID.charAt(1);
         while((parseInt(u)+1)<=parseInt(c1.charAt(0)) && (parseInt(s)+1)<=parseInt(c1.charAt(1)))
@@ -947,7 +857,7 @@ function playerconnectedordisconnected(num){
 
     /////////////////////////////////////////////////////////////////////////
 
-    function queen(currentID){
+    function queen(){
         console.log(q1+":"+q2+":"+":"+q3+":"+q4+":"+q5+":"+q6+":"+q7+":"+q8)
             var u=prevID.charAt(0);
             var s=prevID.charAt(1);
@@ -1032,7 +942,7 @@ function playerconnectedordisconnected(num){
 
 
 /// knight function
-function knight(currentID){
+function knight(){
     var u=prevID.charAt(0);
     var s=prevID.charAt(1);
     if((parseInt(u)-1)>=0 && (parseInt(s)-2)>=0)
@@ -1109,7 +1019,7 @@ function knight(currentID){
     }
 
     /// king
-    function king(currentID){
+    function king(){
     var u=prevID.charAt(0);
     var s=prevID.charAt(1);
     if((parseInt(u)+1)<=7 && (parseInt(s)+1)<=7)
@@ -1310,10 +1220,6 @@ function Empty(currentID,prevID)
    document.getElementById("myAudio").play()
    else
    document.getElementById("alert").play()
-
-   var send = [currentID,prevID]
-socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")
 }
 
 
@@ -1381,13 +1287,7 @@ function nonEmpty(currentID,prevID)
    else
    document.getElementById("alert").play()
 
-
-   var send = [currentID,prevID]
-socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")
-
 }
-
 
 
 function check(currentID,prevID,u,s)
