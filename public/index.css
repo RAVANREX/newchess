@@ -36,3 +36,7 @@
 span.green{
     background:green;
 }
+
+.rotate{
+    transform: rotate(180deg);
+}

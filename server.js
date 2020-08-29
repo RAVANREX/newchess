@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const http = require('http')
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
 const socketio = require('socket.io')
 const app = express()
 const server = http.createServer(app)
@@ -16,12 +16,13 @@ server.listen(PORT,()=> console.log(`server running on port ${PORT}`))
 ////////////////////handel asocket connection from web client
 const connections = [null,null]
 io.on('connection',socket =>{
+    ///consollog new WS connection
     console.log('new WS connection')
     /// find avalible player number
     let playerIndex =-1
     for(const i in connections){
-        if (connections[i] == null){
-            playerIndex=i
+        if (connections[i] === null){
+            playerIndex = i
             break
         }
     }
@@ -32,12 +33,27 @@ io.on('connection',socket =>{
     console.log(`player ${playerIndex} has connected `)
     
     //ignor player 3
-    if(playerIndex == -1) return
-    
+    if(playerIndex === -1) 
+    return
     connections[playerIndex]=false
-
     //tell everyone what player number just connected
     socket.broadcast.emit("player-connection",playerIndex)
 
+    // Handle Diconnect
+  socket.on('disconnect', () => {
+    console.log(`Player ${playerIndex} disconnected`)
+    connections[playerIndex] = null
+    //Tell everyone what player numbe just disconnected
+    socket.broadcast.emit('player-connection', playerIndex)
+    
+  })
 
+
+
+  socket.on('sender', send =>{
+    console.log(send)
+    socket.broadcast.emit('reciv', send)
+    
+  })
 })
+

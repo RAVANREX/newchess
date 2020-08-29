@@ -18,22 +18,24 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script src="/socket.io/socket.io.js"></script>
+
 <link rel="stylesheet" href="index.css">
 
 </head>
 <body>
     <button id="singleplayerbutton">Single Player</button>
     <button id="multiplayerbutton">Multi Player</button>
-    <div class="player p1">
+    <section class="player p1">
         player 1
-        <div class="connected">Connected <span></span></div>
-        <div class="ready">Ready <span></span></div>
-    </div>
-    <div class="player p2">
+        <section class="connected">Connected <span></span></section>
+        <section class="ready">Ready <span></span></section>
+    </section>
+    <section class="player p2">
         player 2
-        <div class="connected">Connected <span></span></div>
-        <div class="ready">Ready <span></span></div>
-    </div>
+        <section class="connected">Connected <span></span></section>
+        <section class="ready">Ready <span></span></section>
+    </section>
     <p class="chessboard box" id="box"></p>    
 
     <script>
@@ -105,8 +107,8 @@
 <audio id="myAudio">
     <source src="chess.mp3" type="audio/mpeg">
   </audio>
+  <script src="index.js"></script>
 <div id="info"></div>
 </body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="index.js"></script>
+
 </html>

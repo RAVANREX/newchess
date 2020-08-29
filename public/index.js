@@ -4,86 +4,142 @@
   let ready=false
   let enemyready=false
   let currentplayer="user"
-  
-   //select player mode
-   $("#singleplayerbutton").click(function(e){
-    gamemode="singleplayer"
-    console.log('hellow world')
-   })
-
-   $("#multiplayerbutton").click(function(e){
+  var playingplayer=""
+  var jadoo=0
+  $("#multiplayerbutton").click(name());
+   function name(){
     gamemode="multiplayer"
-    const socket=io();
+    jadoo=1
+    var socket=io();
+
+    //////////////////////////
+    
+
     //get your player number
-    socket.on('player-number',num=>{
+    socket.on('player-number',num =>{
+        console.log(`we habe git this number ${num}`)
     if(num==-1)
     document.getElementById("info").innerHTML="sorry this server is full"
     else{
     playerNum=parseInt(num)
-    if(playerNum==1)
-    currentplayer="enemy"
-
-
+    if(playerNum==1){
+        currentplayer="enemy"
+        ////// suman edided to rotate board
+        $("#box").addClass("rotate");
+        $(".inside").addClass("rotate");
+    }
     console.log(playerNum)
     }
 }) 
 
+
+
 //another player has connected or disconnected
 socket.on('player-connection', num=>{
     console.log(`player number ${num} has connected or disconnected `)
+    playingplayer=parseInt(num)-1
     playerconnectedordisconnected(num)
    })
-   function playerconnectedordisconnected(num){
-       let player=`.p${parseInt(num)+1}`
-       document.querySelector(`${player}.connected span`).classList.toggle('green')
+
+///ready bitton click
+
+
+function playerconnectedordisconnected(num){
+      let player=`.p${parseInt(num)+1}`
+      document.querySelector(`${player} .connected span`).classList.toggle('green')
        if(parseInt(num)==playerNum){
-           document.querySelector(player).style.fontWeight='bold  '
+       document.querySelector(player).style.fontWeight='bold'
        }
    }
-   })
+
+    
+    ////////////////
+   function funt()
+   {
+       return socket;
+   }
+
+
+
+   }
+
+
+
+    $("div").click(function(e){
+        e.preventDefault()
+        console.log(this.id)
+        startchess(this.id)
+    })
+
+    if(jadoo==1){
+        io.on('reciv', send=>{
+            console.log(`this data is recived from client ${send}`)
+            startchess(send[1])
+            startchess(send[0])
+            })
+    }
+    
+    
+   
+
+   
+   
 
 
 
 
 
-
+    
+    
+        
+    playingplayer=playingplayer+1
 
     var currentID="",prevID="",q1="",q2="",q3="",q4="",q5="",q6="",q7="",q8="";
     var b1="",b2="",b3="",b4="";
     var c1="",c2="",c3="",c4="";
-    var num=1;
+    var functionSelecter=1;
     var whiteKingPos="74",blackKingPos="04";
     var flag="white";
-    $("div").click(function(evt){
-        console.log(flag)
-        currentID=this.id;
+
+
+    
+    function startchess(currentID){
+        console.log(`this in your current id your arae palyer ${playingplayer}`)
+        console.log(`////// currentid holo ${currentID}`)
+        console.log(`previd holo ${prevID}\\\\\\\\`)
         
-         if(num==1){
+    
+  
+
+         if(functionSelecter==1){
             if(flag=="white" && $("#"+currentID).attr("class")=="white")
-            num=fun1();
+            functionSelecter=fun1(currentID);
             else if(flag=="black" && $("#"+currentID).attr("class")=="black")
-            num=fun1();
-        }else if(num==0){
+            functionSelecter=fun1(currentID);
+        }else if(functionSelecter==0){
             if(flag=="black")
-            num=bpawn();
-        }else if(num==2){
+            functionSelecter=bpawn(currentID);
+        }else if(functionSelecter==2){
             if(flag=="white")
-            num=wpawn();
-        }else if(num==3){
-            num=boat();
-        }else if(num==4){
-            num=bishop();
-        }else if(num==5){
-            num=queen();
-        }else if(num==6){
-            num=knight();
-        }else if(num==7){
-            num=king();
+            functionSelecter=wpawn(currentID);
+        }else if(functionSelecter==3){
+            functionSelecter=boat();
+        }else if(functionSelecter==4){
+            functionSelecter=bishop();
+        }else if(functionSelecter==5){
+            functionSelecter=queen();
+        }else if(functionSelecter==6){
+            functionSelecter=knight();
+        }else if(functionSelecter==7){
+            functionSelecter=king();
         }
-    })
+
+    
+///////////
+    }
 
 
-    function fun1(){
+    function fun1(currentID){
         /// black pawn
         if(document.getElementById(currentID).innerText.charCodeAt(0)=="9823"){
         prevID=currentID;
@@ -716,7 +772,7 @@ socket.on('player-connection', num=>{
 
     /// function for guties
 
-    function bpawn(){
+    function bpawn(currentID){
         var u=prevID.charAt(0);
         var s=prevID.charAt(1);
         removeGreen((parseInt(u)+1).toString(),s.toString());
@@ -766,7 +822,7 @@ socket.on('player-connection', num=>{
     }
 
 
-    function wpawn(){
+    function wpawn(currentID){
         var u=prevID.charAt(0);
         var s=prevID.charAt(1);
         removeGreen((parseInt(u)-1).toString(),s.toString());
@@ -1171,15 +1227,18 @@ function Empty(currentID,prevID)
     document.getElementById(currentID).innerHTML=z;
     document.getElementById(currentID).classList.add($("#"+prevID).attr("class"));
     document.getElementById(prevID).classList.remove($("#"+prevID).attr("class"));
-    document.getElementById(prevID).innerHTML=""; 
+    document.getElementById(prevID).innerHTML="";
    if(wkingcheck(whiteKingPos) && flag=="white")
    {   console.log("white king check")
        alert("white king check")
+
        document.getElementById(prevID).innerHTML=z;
        document.getElementById(currentID).innerHTML=""
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
-       flag="black"    
+       flag="black"
+       
+
    }
    if(flag=="black" && bkingcheck(blackKingPos))
    {console.log("black king check")
@@ -1189,7 +1248,17 @@ function Empty(currentID,prevID)
     document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
     document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
     flag="white"
+    
    }
+////////////////////////
+if(gamemode=="multiplayer"){
+    var h=funt()
+var send = [currentID,prevID]
+io.emit('sender', send)
+console.log("ami esagacchi bay of bengal")
+}
+////////////////////////
+
 }
 
 
