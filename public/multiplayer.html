@@ -15,15 +15,44 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
 
 <script src="/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="player.css">
 </head>
 <body>
-    
+    <header>
+    <section class="container">
+        <section class="player p1">
+          player 1
+          <section class="connected">Connected</section>
+          <section class="ready">Ready</section>
+        </section>
+        <section class="player p2">
+            player 2
+            <section class="connected">Connected</section>
+            <section class="ready">Ready</section>
+          </section>
+        </section>
+        <section class="container hidden-info">
+            <section class="setup-buttons" id="setup-buttons">
+            <button id="start" class="btn">Start Game</button>
+            </section>
+        </section>
+        </header>
+        <br>
+        <br>
+
+    <section id="main">
     <section id="left" class="cross"></section>
     <p class="chessboard box" id="box"></p>    
     <section id="right" class="cross"></section>
+    </section>
+    
     <script>
        board="";
        brk =""; 
@@ -119,6 +148,7 @@
   </audio>
   <audio id="alert" src="chess1.mp3"></audio>
   <script src="index.js"></script>
+  <p id="msg" style="display: none;">Sorry this server is full</p>
 
 </body>
 

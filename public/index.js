@@ -16,23 +16,26 @@
     let enemyready=false
     let currentplayer="user"
     var playingplayer=0
-    var socket=io();
+    const startButton=document.querySelector('#start')
+ 
+    const setupButtons=document.getElementById('setup-buttons')
+
+
+
+
+    const socket=io();
       
-
-
-
-
-
-
     
     //get your player number
     socket.on('player-number',num =>{
         console.log(`we habe git this number ${num}`)
-        playingplayer=num;
+        
        
     if(num==-1)
-    document.getElementById("info").innerHTML="sorry this server is full"
-    else{
+    {
+        $("#msg").dialog({});
+    }
+   else{
     playerNum=parseInt(num)
     if(playerNum==1){
         currentplayer="enemy"
@@ -44,6 +47,11 @@
 
     }
     console.log(playerNum)
+
+    /////////
+    //get other player status
+    socket.emit('check-players')
+    ////////
     }
 }) 
 
@@ -55,14 +63,60 @@ socket.on('player-connection', num=>{
     playerconnectedordisconnected(num)
    })
 
+///////////////
+//on enemy ready
+socket.on('enemy-ready',num =>{
+    enemyready=true
+    playerReady(num)
+    if(ready){
+        playGameMulti(socket)
+        setupButtons.style.display='none'
+
+    }
+})
+
+////////////////
+
+
+//check player status
+socket.on('check-players',players =>{
+    players.forEach((p,  i)=>{
+        if(p.connected) playerconnectedordisconnected(i)
+        if(p.ready){
+            playerReady(i)
+            if(i!==playerNum) enemyready=true
+        }
+    })
+})
+
+
+
 ///ready bitton click
+startButton.addEventListener('click',()=>{
+    playGameMulti(socket)
+})
 
 
 function playerconnectedordisconnected(num){
       let player=`.p${parseInt(num)+1}`
-      document.querySelector(`${player} .connected span`).classList.toggle('green')
+      document.querySelector(`${player} .connected`).classList.toggle('active')
        if(parseInt(num)==playerNum){
        document.querySelector(player).style.fontWeight='bold'
+       }
+   }
+
+   function playerReady(num){
+    let player=`.p${parseInt(num) +1}`
+    document.querySelector(`${player} .ready`).classList.toggle('active')
+    
+}
+
+   function playGameMulti(socket){
+       setupButtons.style.display='none'
+       if(!ready){
+           socket.emit('player-ready') 
+           ready=true
+           playerReady(playerNum)
        }
    }
 
@@ -70,17 +124,21 @@ function playerconnectedordisconnected(num){
    
    socket.on('player-number',num=>{
        console.log(num+" vitore")
-   
-
+       
     $("div").click(function(e){
         e.preventDefault()
         console.log(this.id)
+        console.log("num="+num+"ready="+ready+"enemyready="+enemyready)
+        if(num==0 && (!ready || !enemyready))
+        alert("please tell your friend to be ready")
+        else{
         if(num==0 && flag=="white"){
         startchess(this.id)
         }
         if(num==1 && flag=="black"){
             startchess(this.id) 
         }
+    }
     })
 
 
@@ -1284,7 +1342,10 @@ function Empty(currentID,prevID)
     document.getElementById(prevID).classList.remove($("#"+prevID).attr("class"));
     document.getElementById(prevID).innerHTML=""; 
     console.log(whiteKingPos)
-   if(flag=="white" && wkingcheck(whiteKingPos))
+    var cflag=flag;
+    var wflag=wkingcheck(whiteKingPos);
+    var bflag=bkingcheck(blackKingPos);
+   if(flag=="white" && wflag)
    {   
        x=0;
        document.getElementById(prevID).innerHTML=z;
@@ -1292,10 +1353,10 @@ function Empty(currentID,prevID)
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
        flag="black"
-       if(z==w)
-       whiteKingPos=prevID;    
+       if(z==w){
+         whiteKingPos=prevID; }   
    }
-   else if(flag=="black" && bkingcheck(blackKingPos))
+   else if(flag=="black" && bflag)
    {
        x=0;
     document.getElementById(prevID).innerHTML=z;
@@ -1303,17 +1364,19 @@ function Empty(currentID,prevID)
     document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
     document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
     flag="white"
-    if(z==b)
-       BlackKingPos=prevID;
+    if(z==b){
+       blackKingPos=prevID; 
+    }
    }
-   if(x==1)
+   
+
+  if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)){ var send = [currentID,prevID]
+socket.emit('sender', send)
+console.log("ami esagacchi bay of bengal")}
+if(x==1)
    document.getElementById("myAudio").play()
    else
    document.getElementById("alert").play()
-
-   var send = [currentID,prevID]
-socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")
 }
 
 
@@ -1350,6 +1413,7 @@ function nonEmpty(currentID,prevID)
         }
 
     }
+    var cflag=flag;
    
   if(flag=="white" && wflag)
    {x=0;
@@ -1376,15 +1440,16 @@ function nonEmpty(currentID,prevID)
        blackKingPos=prevID;
        }
    }
-   if(x==1)
+   
+
+
+  if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)) {var send = [currentID,prevID]
+socket.emit('sender', send)
+console.log("ami esagacchi bay of bengal")}
+if(x==1)
    document.getElementById("myAudio").play()
    else
    document.getElementById("alert").play()
-
-
-   var send = [currentID,prevID]
-socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")
 
 }
 

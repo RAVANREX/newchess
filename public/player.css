@@ -6,6 +6,18 @@ body{
     background-image: url("back.png");
     background-size: cover;
     background-repeat: no-repeat;
+}
+#start{
+    background-color:red;
+    margin-left:46%;
+    margin-top:10px;
+}
+header{
+    position: relative;
+    height:80px;
+}
+#main{
+    
     display:grid;
     grid-template-rows: 1fr;
     grid-template-columns: 16% 70% 1fr;
@@ -56,10 +68,48 @@ body{
 }
 
 
-@media(max-width:1000px)
+.player {
+    margin: 2vmin;
+    color:red;
+      background-color:black;
+      width:150px;
+      height:75px;
+      text-align:center;
+  }
+  
+  .connected, .ready {
+    font-weight: normal;
+    opacity: .25;
+    text-decoration: line-through;
+  }
+  
+  .connected.active,
+  .ready.active {
+    opacity: 1;
+    text-decoration: none;
+  }
+  .p1{
+      position: absolute;
+      left:0;
+    
+  }
+  .p2{
+      position: absolute;
+      right:0;
+      
+  }
+
+
+@media(max-width:650px)
 {body{
     background-image: url("back1.png");
     background-size: auto;
+    
+}
+header{
+    width:650px;
+}
+#main{
     display:grid;
     grid-template-rows: 16% 70% 1fr;
     grid-template-columns: 1fr;
@@ -68,8 +118,12 @@ body{
     "#left"
     ".chessboard" 
     "#right";
-
 }
+#start{
+    margin-left:40%;
+    margin-top:20px;
+}
+
     
     .cross{
         margin:10px;

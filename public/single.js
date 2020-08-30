@@ -1214,7 +1214,7 @@ function Empty(currentID,prevID)
     document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
     flag="white"
     if(z==b)
-       BlackKingPos=prevID;
+       blackKingPos=prevID;
    }
    if(x==1)
    document.getElementById("myAudio").play()
