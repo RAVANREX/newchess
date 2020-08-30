@@ -17,7 +17,7 @@
     let currentplayer="user"
     var playingplayer=0
     const startButton=document.querySelector('#start')
- 
+
     const setupButtons=document.getElementById('setup-buttons')
 
 
@@ -33,7 +33,14 @@
        
     if(num==-1)
     {
-        $("#msg").dialog({});
+        $("#msg").dialog({
+            dialogClass:"no-close",
+            modal:true,
+            draggable:false,
+            resizable:false,
+            title:"Sayan & Suman's Chess"
+
+        });
     }
    else{
     playerNum=parseInt(num)
@@ -90,6 +97,23 @@ socket.on('check-players',players =>{
 })
 
 
+socket.on('refresh',data =>{
+    if(data==true){
+        
+            $("#disconnected").dialog({
+                modal:true,
+                draggable:false,
+                resizable:false
+            })
+
+    setTimeout(function(){
+    location.reload();
+    },2000)
+}
+})
+
+
+
 
 ///ready bitton click
 startButton.addEventListener('click',()=>{
@@ -101,7 +125,11 @@ function playerconnectedordisconnected(num){
       let player=`.p${parseInt(num)+1}`
       document.querySelector(`${player} .connected`).classList.toggle('active')
        if(parseInt(num)==playerNum){
-       document.querySelector(player).style.fontWeight='bold'
+       $(player).css({
+           "font-weight":"bold",
+           "border":"solid 2px white",
+           "text-shadow":"2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff"
+       })
        }
    }
 
@@ -130,7 +158,13 @@ function playerconnectedordisconnected(num){
         console.log(this.id)
         console.log("num="+num+"ready="+ready+"enemyready="+enemyready)
         if(num==0 && (!ready || !enemyready))
-        alert("please tell your friend to be ready")
+        $("#another").dialog({
+            modal:true,
+            draggable:false,
+            resizable:false,
+            title:"Sayan & Suman's Chess"
+
+        })
         else{
         if(num==0 && flag=="white"){
         startchess(this.id)
@@ -1356,7 +1390,7 @@ function Empty(currentID,prevID)
        if(z==w){
          whiteKingPos=prevID; }   
    }
-   else if(flag=="black" && bflag)
+   if(flag=="black" && bflag)
    {
        x=0;
     document.getElementById(prevID).innerHTML=z;
@@ -1403,7 +1437,7 @@ function nonEmpty(currentID,prevID)
         k=1;
         }
     }
-    else if(flag=="black" && !bflag){
+    if(flag=="black" && !bflag){
         document.getElementById(i.toString()+j.toString()).innerHTML=y;
         if(i+10<=81)
         i+=10
@@ -1428,7 +1462,7 @@ function nonEmpty(currentID,prevID)
        whiteKingPos=prevID;
        }
    }
-   else if(flag=="black" && bflag)
+   if(flag=="black" && bflag)
    {x=0;
        document.getElementById(prevID).innerHTML=z;
        document.getElementById(currentID).innerHTML=y;  

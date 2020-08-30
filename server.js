@@ -27,7 +27,7 @@ io.on('connection',socket =>{
         }
     }
 
-    
+    var v=false;
     //// tell the connectind client what player number they r
     socket.emit('player-number',playerIndex)
     console.log(`player ${playerIndex} has connected `)
@@ -45,7 +45,8 @@ io.on('connection',socket =>{
     connections[playerIndex] = null
     //Tell everyone what player numbe just disconnected
     socket.broadcast.emit('player-connection', playerIndex)
-    
+    var v=true;
+    socket.broadcast.emit('refresh',v);
   })
 
 
