@@ -1194,6 +1194,7 @@ function Empty(currentID,prevID)
     document.getElementById(prevID).classList.remove($("#"+prevID).attr("class"));
     document.getElementById(prevID).innerHTML=""; 
     console.log(whiteKingPos)
+    var c=""
    if(flag=="white" && wkingcheck(whiteKingPos))
    {   
        x=0;
@@ -1201,7 +1202,7 @@ function Empty(currentID,prevID)
        document.getElementById(currentID).innerHTML=""
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
-       flag="black"
+       c="b"
        if(z==w)
        whiteKingPos=prevID;    
    }
@@ -1212,10 +1213,14 @@ function Empty(currentID,prevID)
     document.getElementById(currentID).innerHTML=""
     document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
     document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
-    flag="white"
+    c="w"
     if(z==b)
        blackKingPos=prevID;
    }
+   if(c=="b")
+   flag="black"
+   else if(c=="w")
+   flag="white"
    if(x==1)
    document.getElementById("myAudio").play()
    else
@@ -1256,6 +1261,7 @@ function nonEmpty(currentID,prevID)
         }
 
     }
+    var c=""
    
   if(flag=="white" && wflag)
    {x=0;
@@ -1264,7 +1270,7 @@ function nonEmpty(currentID,prevID)
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))   
        document.getElementById(currentID).classList.add(n);
-       flag="black"
+       c="b"
        console.log(z)
        if(z==w){
        whiteKingPos=prevID;
@@ -1277,11 +1283,15 @@ function nonEmpty(currentID,prevID)
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))   
        document.getElementById(currentID).classList.add(n);
-       flag="white"
+       c="w"
        if(z==b){
        blackKingPos=prevID;
        }
    }
+   if(c=="b")
+   flag="black"
+   else if(c=="w")
+   flag="white"
    if(x==1)
    document.getElementById("myAudio").play()
    else

@@ -1379,6 +1379,7 @@ function Empty(currentID,prevID)
     var cflag=flag;
     var wflag=wkingcheck(whiteKingPos);
     var bflag=bkingcheck(blackKingPos);
+    var c=""
    if(flag=="white" && wflag)
    {   
        x=0;
@@ -1386,7 +1387,7 @@ function Empty(currentID,prevID)
        document.getElementById(currentID).innerHTML=""
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
-       flag="black"
+       c="b"
        if(z==w){
          whiteKingPos=prevID; }   
    }
@@ -1397,11 +1398,15 @@ function Empty(currentID,prevID)
     document.getElementById(currentID).innerHTML=""
     document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
     document.getElementById(currentID).classList.remove($("#"+prevID).attr("class"))
-    flag="white"
+    c="w"
     if(z==b){
        blackKingPos=prevID; 
     }
    }
+   if(c=="b")
+   flag="black"
+   else if(c=="w")
+   flag="white"
    
 
   if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)){ var send = [currentID,prevID]
@@ -1448,7 +1453,7 @@ function nonEmpty(currentID,prevID)
 
     }
     var cflag=flag;
-   
+   var c=""
   if(flag=="white" && wflag)
    {x=0;
        document.getElementById(prevID).innerHTML=z;
@@ -1456,7 +1461,7 @@ function nonEmpty(currentID,prevID)
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))   
        document.getElementById(currentID).classList.add(n);
-       flag="black"
+       c="b"
        console.log(z)
        if(z==w){
        whiteKingPos=prevID;
@@ -1469,12 +1474,15 @@ function nonEmpty(currentID,prevID)
        document.getElementById(prevID).classList.add($("#"+currentID).attr("class"));
        document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))   
        document.getElementById(currentID).classList.add(n);
-       flag="white"
+       c="w"
        if(z==b){
        blackKingPos=prevID;
        }
    }
-   
+   if(c=="b")
+   flag="white"
+   else if(c=="w")
+   flag="black"
 
 
   if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)) {var send = [currentID,prevID]
