@@ -28,7 +28,7 @@
     
     //get your player number
     socket.on('player-number',num =>{
-        console.log(`we habe git this number ${num}`)
+        ///console.log(`we habe git this number ${num}`)
         
        
     if(num==-1)
@@ -53,7 +53,7 @@
         $("#right").addClass("rotate");
 
     }
-    console.log(playerNum)
+    ///console.log(playerNum)
 
     /////////
     //get other player status
@@ -66,7 +66,7 @@
 
 //another player has connected or disconnected
 socket.on('player-connection', num=>{
-    console.log(`player number ${num} has connected or disconnected `)
+    ///console.log(`player number ${num} has connected or disconnected `)
     playerconnectedordisconnected(num)
    })
 
@@ -151,12 +151,12 @@ function playerconnectedordisconnected(num){
    
    
    socket.on('player-number',num=>{
-       console.log(num+" vitore")
+       ///console.log(num+" vitore")
        
     $("div").click(function(e){
         e.preventDefault()
-        console.log(this.id)
-        console.log("num="+num+"ready="+ready+"enemyready="+enemyready)
+        ///console.log(this.id)
+        ///console.log("num="+num+"ready="+ready+"enemyready="+enemyready)
         if(num==0 && (!ready || !enemyready))
         $("#another").dialog({
             modal:true,
@@ -181,16 +181,16 @@ function playerconnectedordisconnected(num){
 
     
         socket.on('reciv', send=>{
-            console.log(`this data is recived from client ${send}`)
+            ///console.log(`this data is recived from client ${send}`)
             startchess(send[1])
             startchess(send[0])
             })
     
     
     function startchess(currentID){
-        console.log(`this in your current id your arae palyer ${playingplayer}`)
-        console.log(`////// currentid holo ${currentID}`)
-        console.log(`previd holo ${prevID}\\\\\\\\`)
+        ///console.log(`this in your current id your arae palyer ${playingplayer}`)
+        ///console.log(`////// currentid holo ${currentID}`)
+        ///console.log(`previd holo ${prevID}\\\\\\\\`)
         
     
   
@@ -450,7 +450,7 @@ function playerconnectedordisconnected(num){
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s.toString()).attr("class")){
                         c4=(parseInt(u)+1).toString()+(parseInt(s)-1).toString();
-                        console.log(q4+"q4")
+                        ///console.log(q4+"q4")
                     break;}
                     else{  
                         addGreen(u.toString(),s.toString());
@@ -475,20 +475,20 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s.toString());
                 if(parseInt(u)==7 || parseInt(s)==7){
                     q1=u.toString()+s.toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s.toString()).attr("class")){
                         q1=(parseInt(u)-1).toString()+(parseInt(s)-1).toString();
-                        console.log(q1)
+                        ///console.log(q1)
                     break;
                     }
                     else{
                         addGreen(u.toString(),s.toString());
                         q1=u.toString()+s.toString();
-                        console.log(q1)
+                        ///console.log(q1)
                     break;    
                 }
                 }
@@ -503,19 +503,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s.toString());
                 if(parseInt(u)==0 || parseInt(s)==0){
                     q2=u.toString()+s.toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s.toString()).attr("class")){
                         q2=(parseInt(u)+1).toString()+(parseInt(s)+1).toString();
-                        console.log(q2)
+                        ///console.log(q2)
                         break;}
                     else{
                         addGreen(u.toString(),s.toString());
                         q2=u.toString()+s.toString();
-                        console.log(q2)
+                        ///console.log(q2)
                     break;    
                 }
                 }
@@ -530,19 +530,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s.toString());
                 if(parseInt(u)==7 || parseInt(s)==0){
                     q3=u.toString()+s.toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s.toString()).attr("class")){
                         q3=(parseInt(u)-1).toString()+(parseInt(s)+1).toString();
-                        console.log(q3)
+                        ///console.log(q3)
                     break;}
                     else{
                         addGreen(u.toString(),s.toString());
                         q3=u.toString()+s.toString();
-                        console.log(q3)
+                        ///console.log(q3)
                     break;    
                 }
                 }
@@ -557,19 +557,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s.toString());
                 if(parseInt(u)==0 || parseInt(s)==7){
                     q4=u.toString()+s.toString();
-                    console.log(q4+"q7")
+                    ///console.log(q4+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s.toString()).attr("class")){
                         q4=(parseInt(u)+1).toString()+(parseInt(s)-1).toString();
-                        console.log(q4+"q4")
+                        ///console.log(q4+"q4")
                     break;}
                     else{  
                         addGreen(u.toString(),s.toString());
                         q4=u.toString()+s.toString();
-                        console.log("q4"+q4)
+                        ///console.log("q4"+q4)
                     break;    
                 }
                 }
@@ -584,19 +584,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s);
                 if(parseInt(u)==7){
                     q5=u.toString()+s.toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s).attr("class")){
                         q5=(parseInt(u)-1).toString()+s.toString();
-                        console.log(q5)
+                        ///console.log(q5)
                     break;}
                     else{
                         q5=u.toString()+s.toString();
                         addGreen(u.toString(),s);
-                        console.log(q5)
+                        ///console.log(q5)
                     break;    
                 }
                 }
@@ -610,19 +610,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u.toString(),s);
                 if(parseInt(u)==0){
                     q6=u.toString()+s.toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u.toString()+s).attr("class")){
                         q6=(parseInt(u)+1).toString()+s.toString();
-                        console.log(q6)
+                        ///console.log(q6)
                     break;}
                     else{
                         addGreen(u.toString(),s);
                         q6=u.toString()+s.toString();
-                        console.log(q6)
+                        ///console.log(q6)
                     break;    
                 }
                 }
@@ -637,19 +637,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u,s.toString());
                 if(parseInt(s)==0){
                     q7=u.toString()+(parseInt(s)).toString();
-                    console.log(q7+"q7")
+                    ///console.log(q7+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u+s.toString()).attr("class")){
                         q7=u.toString()+(parseInt(s)+1).toString();
-                        console.log(q7+"q7")
+                        ///console.log(q7+"q7")
                     break;}
                     else{
                         q7=u.toString()+s.toString();
                         addGreen(u,s.toString());
-                        console.log(q7+"q7")
+                        ///console.log(q7+"q7")
                     break;    
                 }
                 }
@@ -663,19 +663,19 @@ function playerconnectedordisconnected(num){
                 addGreen(u,s.toString());
                 if(parseInt(s)==7){
                     q8=u.toString()+(parseInt(s)).toString();
-                    console.log(q8+"q7")
+                    ///console.log(q8+"q7")
                 }
                 }
                 else
                 {
                     if($("#"+currentID).attr("class")==$("#"+u+s.toString()).attr("class")){
                         q8=u.toString()+(parseInt(s)-1).toString();
-                        console.log(q8)
+                        ///console.log(q8)
                     break;}
                     else{
                         q8=u.toString()+s.toString();
                         addGreen(u,s.toString());
-                        console.log(q8)
+                        ///console.log(q8)
                     break;    
                 }
                 }
@@ -1040,7 +1040,7 @@ function playerconnectedordisconnected(num){
     /////////////////////////////////////////////////////////////////////////
 
     function queen(currentID){
-        console.log(q1+":"+q2+":"+":"+q3+":"+q4+":"+q5+":"+q6+":"+q7+":"+q8)
+        ///console.log(q1+":"+q2+":"+":"+q3+":"+q4+":"+q5+":"+q6+":"+q7+":"+q8)
             var u=prevID.charAt(0);
             var s=prevID.charAt(1);
             while((parseInt(u)+1)<=parseInt(q1.charAt(0)) && (parseInt(s)+1)<=parseInt(q1.charAt(1)))
@@ -1375,7 +1375,7 @@ function Empty(currentID,prevID)
     document.getElementById(currentID).classList.add($("#"+prevID).attr("class"));
     document.getElementById(prevID).classList.remove($("#"+prevID).attr("class"));
     document.getElementById(prevID).innerHTML=""; 
-    console.log(whiteKingPos)
+    ///console.log(whiteKingPos)
     var cflag=flag;
     var wflag=wkingcheck(whiteKingPos);
     var bflag=bkingcheck(blackKingPos);
@@ -1411,7 +1411,8 @@ function Empty(currentID,prevID)
 
   if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)){ var send = [currentID,prevID]
 socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")}
+///console.log("ami esagacchi bay of bengal")
+}
 if(x==1)
    document.getElementById("myAudio").play()
    else
@@ -1429,7 +1430,7 @@ function nonEmpty(currentID,prevID)
     document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))
     document.getElementById(currentID).classList.add($("#"+prevID).attr("class"));
     document.getElementById(prevID).classList.remove($("#"+prevID).attr("class"))
-    console.log(whiteKingPos)
+    ///console.log(whiteKingPos)
     var bflag=bkingcheck(blackKingPos);
     var wflag=wkingcheck(whiteKingPos)
     if(flag=="white" && !wflag)
@@ -1462,7 +1463,7 @@ function nonEmpty(currentID,prevID)
        document.getElementById(currentID).classList.remove($("#"+currentID).attr("class"))   
        document.getElementById(currentID).classList.add(n);
        c="b"
-       console.log(z)
+       ///console.log(z)
        if(z==w){
        whiteKingPos=prevID;
        }
@@ -1487,7 +1488,8 @@ function nonEmpty(currentID,prevID)
 
   if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)) {var send = [currentID,prevID]
 socket.emit('sender', send)
-console.log("ami esagacchi bay of bengal")}
+///console.log("ami esagacchi bay of bengal")
+}
 if(x==1)
    document.getElementById("myAudio").play()
    else
@@ -1539,7 +1541,7 @@ function wkingcheck(whiteKingPos){
     
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(1)
+    ///console.log(1)
     var count=0;
     while((parseInt(u)+1)<=7 && (parseInt(s)+1)<=7)
     {
@@ -1562,7 +1564,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(2)
+    ///console.log(2)
     count=0;
     while((parseInt(u)-1)>=0 && (parseInt(s)-1)>=0)
     {
@@ -1585,7 +1587,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(3)
+    ///console.log(3)
     count=0;
     while((parseInt(u)+1)<=7 && (parseInt(s)-1)>=0)
     {
@@ -1608,7 +1610,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(4)
+    ///console.log(4)
     count=0;
     while((parseInt(u)-1)>=0 && (parseInt(s)+1)<=7)
     {
@@ -1631,7 +1633,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(5)
+    ///console.log(5)
     count=0;
     while((parseInt(u)+1)<=7)
     {
@@ -1653,7 +1655,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(6)
+    ///console.log(6)
     count=0;
     while((parseInt(u)-1)>=0)
     {
@@ -1675,7 +1677,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(7)
+    ///console.log(7)
     count=0
     while((parseInt(s)+1)<=7)
     {
@@ -1697,7 +1699,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(8)
+    ///console.log(8)
     count=0
     while((parseInt(s)-1)>=0)
     {
@@ -1719,7 +1721,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(9)
+    ///console.log(9)
     if((parseInt(u)-1)>=0 && (parseInt(s)-2)>=0)
     {
         u=parseInt(u)-1;
@@ -1734,7 +1736,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(10)
+    ///console.log(10)
     if((parseInt(u)-1)>=0 && (parseInt(s)+2)<=7)
     {
         u=parseInt(u)-1;
@@ -1749,7 +1751,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(11)
+    ///console.log(11)
     if((parseInt(u)+1)<=7 && (parseInt(s)-2)>=0)
     {
         u=parseInt(u)+1;
@@ -1764,7 +1766,7 @@ function wkingcheck(whiteKingPos){
     }
     u=whiteKingPos.charAt(0);
     s=whiteKingPos.charAt(1);
-    console.log(12)
+    ///console.log(12)
     if((parseInt(u)+1)<=7 && (parseInt(s)+2)<=7)
     {
         u=parseInt(u)+1;
