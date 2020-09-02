@@ -17,6 +17,7 @@
     let currentplayer="user"
     var playingplayer=0
     const startButton=document.querySelector('#start')
+    const roomContainer = document.getElementById('room-container')
 
     const setupButtons=document.getElementById('setup-buttons')
 
@@ -24,11 +25,43 @@
 
 
     const socket=io();
+
+
+
+
+    socket.on('room-created', room => {
+        const roomElement = document.createElement('div')
+        roomElement.innerText = room
+        const roomLink = document.createElement('a')
+        roomLink.href = `/${room}`
+        roomLink.innerText = 'join'
+        roomContainer.append(roomElement)
+        roomContainer.append(roomLink)
+      })
+      
+
+      console.log(roomName)
+
+      socket.emit('room',roomName);
+      socket.on('server-full',full=>{
+        if(full){
+        $("#msg").dialog({
+            dialogClass:"no-close",
+            modal:true,
+            draggable:false,
+            resizable:false,
+            title:"Sayan & Suman's Chess"
+
+        });
+    }
+    })
+      
       
     
     //get your player number
     socket.on('player-number',num =>{
         ///console.log(`we habe git this number ${num}`)
+        
         
        
     if(num==-1)
@@ -97,7 +130,7 @@ socket.on('check-players',players =>{
 })
 
 
-socket.on('refresh',data =>{
+socket.on('refresh',(data,room) =>{
     if(data==true){
         
             $("#disconnected").dialog({
@@ -1410,7 +1443,7 @@ function Empty(currentID,prevID)
    
 
   if((cflag=="white" && !wflag) ||(cflag=="black" && !bflag)){ var send = [currentID,prevID]
-socket.emit('sender', send)
+socket.emit('sender',send)
 ///console.log("ami esagacchi bay of bengal")
 }
 if(x==1)

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+    rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+   <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+    <script defer src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="new.css">
+    <script>
+        var l=""
+        $(function() {
+            var availableTutorials  = "<% Object.keys(rooms).forEach(room => { %><%= room %> <% }) %>"
+            var a=availableTutorials.split(" ")
+            $( "#automplete-1" ).autocomplete({
+               source: a
+            },{
+                minLength:2,
+                autoFocus:true,
+            });
+         });
+         
+         function fung() {
+             g=document.getElementById("automplete-1").value;
+             document.getElementById("ji").action=g;        
+         }
+
+    </script>
+
+</head>
+<body>
+    
+     <div id="join" class="indexiform">
+            <form id="ji" onsubmit="return fung()">
+                <input id = "automplete-1" class="int" type="text" placeholder="Search For Room Name"style="font-size:20px"  size="18" required>
+                <button type="submit" class="btn button">JOIN</button>
+            </form>
+
+
+     </div>
+    <!--<div id="room-container">
+    <% Object.keys(rooms).forEach(room => { %>
+    <div class="wi"><a href="/<%= room %>" class="button btnPush btnLightBlue"><%= room %></a></div>
+        
+      <% }) %>
+    </div>-->
+    <div class="indexiform">
+    <form action="/room" method="POST">
+    <input class="int" name="room" type="text" style="font-size:20px"  size="18" placeholder="Create a New Room" autocomplete="off" required>
+    <button class="btn button" type="Submit">New Room</button>
+    </form>
+</div>
+
+
+</body>
+</html>

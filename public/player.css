@@ -121,8 +121,11 @@ background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 56%
     
 }
 header{
-    width:650px;
+    width:100%;
+    position: relative;
 }
+
+
 #main{
     display:grid;
     grid-template-rows: 16% 70% 1fr;
@@ -137,20 +140,52 @@ header{
     margin-left:40%;
     margin-top:20px;
 }
-
-    
+.box{
+    background-image: url("chess1.svg");
+    background-repeat: no-repeat;
+    width:300px;
+    height: 300px;
+    display:grid;
+    grid-template-rows: repeat(8,37.5px);
+    grid-template-columns: repeat(8,37.5px);
+}
+.chessboard {
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    border: 25px solid #333;
+    box-shadow: black 8px 8px 4px;
+}
+    .inside{
+        font-size: 32px;
+    }
     .cross{
-        margin:10px;
-        height: 150px;
-        width:600px;
+        margin:auto;
+        height: 75px;
+        width:350px;
         border:solid black 5px;
-        border-radius: 20px;
+        border-radius: 10px;
         display:grid;
-        grid-template-rows:repeat(2,75px);
-        grid-template-columns:repeat(8,75px);
+        grid-template-rows:repeat(2,37.5px);
+        grid-template-columns:repeat(8,37.5px);
         background-image: url(box1.jpg);
         background-repeat: no-repeat;
         box-shadow: 8px 8px 5px black;
+    }
+    .player{
+        width:130px;
+        height:75px;
+    }
+    #start{
+        background-color:blue;
+        margin-left:38%;
+        margin-top:10px;
+        border:solid 2px black;
+        font-weight: bold;
+        font-size:1.2rem;
+        box-shadow: black 4px 4px 2px;
+        color:white;
+        width:85px;
     }
 
 }
